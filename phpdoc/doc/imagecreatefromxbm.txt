@@ -1,0 +1,34 @@
+imagecreatefromxbm -- Create a new image from file or URL
+
+  resource imagecreatefromxbm(string filename)~
+
+|imagecreatefromxbm| returns an image identifier representing the image
+obtained from the given filename.
+
+A URL can be used as a filename with this function if the fopen wrappers have
+been enabled. See |fopen| for more details on how to specify the filename and
+for a list of supported URL protocols.
+
+{filename} Path to the XBM image.
+
+Returns an image resource identifier on success, FALSE on errors.
+
+Convert an XBM image to a png image using |imagecreatefromxbm|
+
+<?php >
+  // Load the xbm file
+  $xbm = imagecreatefromxbm('./example.xbm');
+  
+  // Convert it to a png file
+  imagepng($xbm, './example.png');
+  imagedestroy($xbm);
+?>
+
+
+
+
+
+Windows versions of PHP prior to PHP 4.3.0 do not support access of remote
+files via this function, even if allow_url_fopen is enabled.
+
+vim:ft=help:

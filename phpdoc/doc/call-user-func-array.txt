@@ -1,0 +1,85 @@
+call_user_func_array -- Call a user function given with an array of parameters
+
+  mixed call_user_func_array(callback function, array param_arr)~
+
+Call a user defined {function} with the parameters in {param_arr}.
+
+{function} The function to be called.
+
+{param_arr} The parameters to be passed to the function, as an indexed array.
+
+Returns the function result, or FALSE on error.
+
+|call_user_func_array| example
+
+<?php >
+  function debug($var, $val)
+  {
+      echo "***DEBUGGING\nVARIABLE: $var\nVALUE:";
+      if (is_array($val) || is_object($val) || is_resource($val)) {
+          print_r($val);
+      } else {
+          echo "\n$val\n";
+      }
+      echo "***\n";
+  }
+  
+  $c = new StdClass();
+  $host = $_SERVER["PHP_SELF"];
+  
+  call_user_func_array('debug', array("host", $host));
+  call_user_func_array('debug', array("c", $c));
+  call_user_func_array('debug', array("_POST", $_POST));
+?>
+
+The above example will output something similar to:
+
+  
+
+|call_user_func_array| using namespace name
+
+<?php >
+  namespace Foobar;
+  
+  class Foo {
+      static public function test($name) {
+          print "Hello {$name}!\n";
+      }
+  }
+  
+  // As of PHP 5.3.0
+  call_user_func_array(__NAMESPACE__ .'\Foo::test', array('Hannes'));
+  
+  // As of PHP 5.3.0
+  call_user_func_array(array(__NAMESPACE__ .'\Foo', 'test'), array('Philip'));
+?>
+
+The above example will output something similar to:
+
+  Hello Hannes!
+  Hello Philip!
+
+Using lambda function
+
+<?php >
+  $func = function($arg1, $arg2) {
+      return $arg1 * $arg2;
+  };
+  
+  var_dump(call_user_func_array($func, array(2, 4))); /* As of PHP 5.3.0 */
+?>
+
+The above example will output:
+
+  int(8)
+
+
+
+Referenced variables in {param_arr} are passed to the function by a reference,
+others are passed by a value. In other words, it does not depend on the
+function signature whether the parameter is passed by a value or by a
+reference.
+
+|call_user_func| information about the callback type
+
+vim:ft=help:
