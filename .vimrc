@@ -62,7 +62,11 @@
   " 状态行颜色
   highlight StatusLine guifg=SlateBlue guibg=Yellow
   "highlight StatusLineNC guifg=Gray guibg=White
- 
+
+  " 默认窗口分割方向
+  set splitbelow
+  set splitright
+
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " 文件设置
   """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
